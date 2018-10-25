@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.plazapp.eci.plazapp.LoginActivity"
+    android:background="@drawable/login"
+    android:weightSum = "1"
+    >
+
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="421dp"
+        app:srcCompat="@drawable/bar" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Usuario:"
+            android:layout_marginTop="220dp"/>
+
+        <EditText
+            android:id="@+id/userN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contraseña:"/>
+
+        <EditText
+            android:id="@+id/userPas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/buttonLogin"
+            android:layout_width="275dp"
+            android:layout_height="48dp"
+            android:background="@color/colorAccent"
+            android:onClick="loginUser"
+            android:layout_marginTop="25dp"
+            android:text="Iniciar Sesion"
+            android:textColor="@color/fontWhite" />
+
+        />
+
+        <TextView
+            android:id="@+id/singUp"
+            android:layout_width="108dp"
+            android:layout_height="27dp"
+            android:layout_marginVertical="25dp"
+            android:gravity="center_horizontal"
+            android:clickable="true"
+            android:onClick="registerUser"
+            android:text="Registrate"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20dp" />
+
+    </LinearLayout>
+
+</RelativeLayout>
