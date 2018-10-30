@@ -13,7 +13,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.plazapp.eci.plazapp.app.App;
+
 public class LoginActivity extends AppCompatActivity {
+
     private EditText userName;
     private EditText userPass;
     private TextView register;
@@ -32,7 +35,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void loginUser(View v){
-        if (userName.getText().toString().equals(user) && userPass.getText().toString().equals(passUser)){
+        //if (PlazApp.loginApp(userName.getText().toString(), userPass.getText().toString())){
+        if(true){
             startActivity(new Intent(LoginActivity.this,UserIndex.class));
         }else{
             alertDialog.setTitle("Usuario o contraseña incorrecta");
@@ -52,5 +56,6 @@ public class LoginActivity extends AppCompatActivity {
     public void registerUser(View v){
         startActivity(new Intent(LoginActivity.this,RegisterUser.class));
     }
+
 }
 

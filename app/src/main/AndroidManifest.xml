@@ -17,7 +17,7 @@
         android:theme="@style/AppFullScreenTheme">
 
         <!-- android:theme="@style/AppTheme" -->
-        <activity android:name=".LoginActivity">
+        <activity android:name=".PlazApp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,10 +25,19 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".LoginActivity"
+            android:label="Login"
+            android:theme="@style/AppFullScreenTheme"
+            />
+        <activity
             android:name=".UserIndex"
-            android:label="@string/title_activity_user_index"
+            android:label="Index"
             android:theme="@style/AppFullScreenTheme" />
-        <activity android:name=".RegisterUser"></activity>
+        <activity
+            android:name=".RegisterUser"
+            android:label="Register"
+            android:theme="@style/AppFullScreenTheme"
+            />
     </application>
 
 </manifest>

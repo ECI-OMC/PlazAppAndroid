@@ -15,6 +15,8 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.plazapp.eci.plazapp.app.App;
+
 public class UserIndex extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -28,7 +30,7 @@ public class UserIndex extends AppCompatActivity
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        
+
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -98,4 +100,6 @@ public class UserIndex extends AppCompatActivity
         String[] unidades = {"Kilogramos","Toneladas","Gramos","Libras","Unidad"};
         spinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, unidades));
     }
+
+
 }

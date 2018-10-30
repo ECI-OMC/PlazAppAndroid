@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
+import com.plazapp.eci.plazapp.app.App;
+
 public class RegisterUser extends AppCompatActivity {
     private String userName;
     private String email;
@@ -41,8 +43,8 @@ public class RegisterUser extends AppCompatActivity {
         email = var.getText().toString();
         var = findViewById(R.id.nickImput);
         nick = var.getText().toString();
-
-        if (validateUserInfo(userName,email,nick)){
+        if(true){
+        //if (PlazApp.registerUser(userName,nick,email,rol,"11111","url")){
             alertDialog.setTitle("Registro Exitoso");
             alertDialog.setMessage("Se ha registrado satisfactoriamente");
             alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
@@ -79,4 +81,5 @@ public class RegisterUser extends AppCompatActivity {
             rol= "Comprador";
         }
     }
+
 }

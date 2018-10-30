@@ -2,9 +2,13 @@ package com.plazapp.eci.plazapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
 import com.plazapp.eci.plazapp.app.App;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static android.support.v4.content.ContextCompat.startActivity;
 
@@ -14,20 +18,35 @@ import static android.support.v4.content.ContextCompat.startActivity;
 
 public class PlazApp extends AppCompatActivity{
 
-    static final App application = new App();
+    public static final App application = new App();
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startActivity(new Intent(PlazApp.this, LoginActivity.class));
+        setContentView(R.layout.plazapp_layout);
     }
 
-    public static final void loginApp(String un, String pswd){
-        application.handleLogin(un,pswd);
+    @Override
+    protected void onStart(){
+        super.onStart();
+        Handler timer = new Handler();
+        Runnable updateProfile = new Runnable() {
+            @Override
+            public void run() {
+                startActivity(new Intent(PlazApp.this, LoginActivity.class));
+            }
+        };
+        timer.postDelayed(updateProfile, 800);
     }
 
-    public static final void registerUser(String userName, String nick,String email, String rol, String id, String url){
-        application.handleRegister(userName,nick,email,rol,id,url);
+    public static final boolean loginApp(String un, String pswd){
+        return application.handleLogin(un,pswd);
     }
+
+    public static final boolean registerUser(String userName, String nick,String email, String rol, String id, String url){
+        return application.handleRegister(userName,nick,email,rol,id,url);
+    }
+
 
 }

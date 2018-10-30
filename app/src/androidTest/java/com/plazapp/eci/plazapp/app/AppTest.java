@@ -1,3 +1,5 @@
+package com.plazapp.eci.plazapp.app;
+
 import static org.junit.Assert.*;
 
 /**
