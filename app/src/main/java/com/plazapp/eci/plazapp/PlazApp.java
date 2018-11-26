@@ -30,14 +30,8 @@ public class PlazApp extends AppCompatActivity{
     @Override
     protected void onStart(){
         super.onStart();
-        Handler timer = new Handler();
-        Runnable updateProfile = new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent(PlazApp.this, LoginActivity.class));
-            }
-        };
-        timer.postDelayed(updateProfile, 800);
+            startActivity(new Intent(PlazApp.this, LoginActivity.class));
+
     }
 
     public static final boolean loginApp(String un, String pswd){

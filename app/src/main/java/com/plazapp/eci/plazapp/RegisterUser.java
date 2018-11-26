@@ -43,8 +43,7 @@ public class RegisterUser extends AppCompatActivity {
         email = var.getText().toString();
         var = findViewById(R.id.nickImput);
         nick = var.getText().toString();
-        if(true){
-        //if (PlazApp.registerUser(userName,nick,email,rol,"11111","url")){
+        if (PlazApp.registerUser(userName,nick,email,rol,"11111","url")){
             alertDialog.setTitle("Registro Exitoso");
             alertDialog.setMessage("Se ha registrado satisfactoriamente");
             alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",

@@ -35,8 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void loginUser(View v){
-        //if (PlazApp.loginApp(userName.getText().toString(), userPass.getText().toString())){
-        if(true){
+        if (PlazApp.loginApp(userName.getText().toString(), userPass.getText().toString())){
             startActivity(new Intent(LoginActivity.this,UserIndex.class));
         }else{
             alertDialog.setTitle("Usuario o contraseña incorrecta");
