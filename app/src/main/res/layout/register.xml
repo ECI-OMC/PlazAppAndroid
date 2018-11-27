@@ -11,26 +11,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
-        android:background="@drawable/background_button">
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
-            android:clickable="true"
-            android:onClick="goBack"
-            app:srcCompat="@drawable/back" />
-            />
+        android:background="@color/colorAccent">
 
         <TextView
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Registrate Ahora!"
             android:textSize="20dp"
             android:textColor="@color/fontWhite"
-            android:fontFamily= "casual"
-            android:gravity="center"
+            android:gravity="center_horizontal"
             />
     </LinearLayout>
 
@@ -39,7 +30,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="10dp"
-        android:layout_marginTop="25dp">
+        android:layout_marginTop="50dp">
 
         <TextView
             android:id="@+id/name"
@@ -87,36 +78,16 @@
             android:inputType="textPersonName" />
 
         <TextView
-            android:id="@+id/TipoUsuario"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Seleccione su rol:" />
-
-        <RadioButton
-            android:id="@+id/Vendedor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Vendedor"
-            android:onClick="selectType"/>
-
-        <RadioButton
-            android:id="@+id/Comprador"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="selectType"
-            android:text="Comprador" />
-
-        <TextView
             android:id="@+id/Foto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:text="Suba una foto:" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="186dp"
+            android:layout_height="216dp"
+            android:layout_marginTop="20dp"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
@@ -173,11 +144,21 @@
                 android:id="@+id/button3"
                 android:layout_width="299dp"
                 android:layout_height="46dp"
-                android:layout_marginBottom="40dp"
                 android:layout_marginTop="10dp"
+                android:background="@color/colorAccent"
                 android:onClick="registrar"
-                android:text="Registrarse" />
+                android:text="Registrarse"
+                android:textColor="@color/fontWhite" />
 
+            <TextView
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Volver"
+                android:textSize="17dp"
+                android:layout_gravity="center_horizontal"
+                android:clickable="true"
+                android:onClick="goBack"/>
 
         </LinearLayout>
 

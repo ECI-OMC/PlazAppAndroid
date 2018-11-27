@@ -68,17 +68,4 @@ public class RegisterUser extends AppCompatActivity {
 
     }
 
-    public void selectType(View v){
-
-        if (findViewById(R.id.Vendedor)==v){
-            type = findViewById(R.id.Comprador);
-            type.setChecked(false);
-            rol = "Vendedor";
-        }else if (findViewById(R.id.Comprador)==v){
-            type = findViewById(R.id.Vendedor);
-            type.setChecked(false);
-            rol= "Comprador";
-        }
-    }
-
 }
