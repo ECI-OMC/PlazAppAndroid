@@ -8,18 +8,15 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-    <include
-        layout="@layout/app_bar_user_index"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <include layout="@layout/index_layout"/>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
+        android:layout_gravity="left"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_user_index"
-        app:menu="@menu/index_drawer" />
+        app:headerLayout="@navigation/header_nav_bar"
+        app:menu="@navigation/menu_nav_bar" />
 
 </android.support.v4.widget.DrawerLayout>

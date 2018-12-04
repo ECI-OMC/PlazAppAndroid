@@ -1,4 +1,4 @@
-package com.plazapp.eci.plazapp;
+package com.plazapp.eci.plazapp.front;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -8,14 +8,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
-import com.plazapp.eci.plazapp.app.App;
+import com.plazapp.eci.plazapp.R;
 
 public class RegisterUser extends AppCompatActivity {
     private String userName;
     private String email;
-    private String nick;
-    private RadioButton type;
-    private String rol;
+    private String pass;
     private String photoSrc;
     private AlertDialog alertDialog;
 
@@ -41,9 +39,9 @@ public class RegisterUser extends AppCompatActivity {
         userName = var.getText().toString();
         var= findViewById(R.id.emailImput);
         email = var.getText().toString();
-        var = findViewById(R.id.nickImput);
-        nick = var.getText().toString();
-        if (PlazApp.registerUser(userName,nick,email,rol,"11111","url")){
+        var = findViewById(R.id.passInput);
+        pass = var.getText().toString();
+        if (PlazApp.registerUser(userName,email,"11111","url", pass)){
             alertDialog.setTitle("Registro Exitoso");
             alertDialog.setMessage("Se ha registrado satisfactoriamente");
             alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",

@@ -1,19 +1,16 @@
-package com.plazapp.eci.plazapp;
+package com.plazapp.eci.plazapp.front;
 
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.plazapp.eci.plazapp.app.App;
+import com.plazapp.eci.plazapp.R;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -28,25 +25,31 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       alertDialog = new AlertDialog.Builder(LoginActivity.this).create();
+        alertDialog = new AlertDialog.Builder(LoginActivity.this).create();
         setContentView(R.layout.activity_login);
         userName = findViewById(R.id.userN);
         userPass = findViewById(R.id.userPas);
     }
 
+    private void dialog (String tittle, String message){
+        alertDialog.setTitle(tittle);
+        alertDialog.setMessage(message);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
+
+
     public void loginUser(View v){
-        if (PlazApp.loginApp(userName.getText().toString(), userPass.getText().toString())){
-            startActivity(new Intent(LoginActivity.this,UserIndex.class));
+        boolean cond = PlazApp.loginApp(userName.getText().toString(), userPass.getText().toString());
+        if (cond){
+            startActivity(new Intent(LoginActivity.this, Index.class));
         }else{
-            alertDialog.setTitle("Usuario o contraseña incorrecta");
-            alertDialog.setMessage("el usuario o la contraseña no coinciden...Intente de nuevo");
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-            alertDialog.show();
+            dialog("No se pudo iniciar Sesión","Los datos ingresados no son validos");
         }
         userName.setText("");
         userPass.setText("");

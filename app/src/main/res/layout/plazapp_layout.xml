@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.plazapp.eci.plazapp.PlazApp"
+    tools:context="com.plazapp.eci.plazapp.front.PlazApp"
     android:background="@drawable/backind"
     android:weightSum = "1"
     >

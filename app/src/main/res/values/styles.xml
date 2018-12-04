@@ -9,6 +9,19 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="tittle">
+        <item name="android:textSize">30dp</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="tittleContrast">
+        <item name="android:textSize">30dp</item>
+        <item name="android:textColor">@color/fontWhite</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+
     <style name="AppFullScreenTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppFullScreenTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

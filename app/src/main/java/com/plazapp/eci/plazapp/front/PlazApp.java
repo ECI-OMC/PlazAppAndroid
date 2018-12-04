@@ -1,28 +1,23 @@
-package com.plazapp.eci.plazapp;
+package com.plazapp.eci.plazapp.front;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
-import com.plazapp.eci.plazapp.app.App;
-
-import java.util.Timer;
-import java.util.TimerTask;
-
-import static android.support.v4.content.ContextCompat.startActivity;
+import com.plazapp.eci.plazapp.R;
+import com.plazapp.eci.plazapp.back.App;
 
 /**
  * Created by Jeffer on 29/10/2018.
+ * esta es la que se crea de primeras
  */
 
 public class PlazApp extends AppCompatActivity{
 
-    public static final App application = new App();
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        App.initialize();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.plazapp_layout);
     }
@@ -31,16 +26,19 @@ public class PlazApp extends AppCompatActivity{
     protected void onStart(){
         super.onStart();
             startActivity(new Intent(PlazApp.this, LoginActivity.class));
-
     }
 
     public static final boolean loginApp(String un, String pswd){
-        return application.handleLogin(un,pswd);
+        boolean ans = App.handleLogin(un,pswd);
+        return ans;
     }
 
-    public static final boolean registerUser(String userName, String nick,String email, String rol, String id, String url){
-        return application.handleRegister(userName,nick,email,rol,id,url);
+    public static final boolean registerUser(String userName,String email, String rating, String url, String pass){
+        return App.handleRegister(userName,email,rating,pass, url);
     }
 
+    public static String getNameCurrentUser(){
+        return App.currentUser().getUserName();
+    }
 
 }

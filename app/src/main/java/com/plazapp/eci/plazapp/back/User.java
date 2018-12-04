@@ -1,4 +1,4 @@
-package com.plazapp.eci.plazapp.app;
+package com.plazapp.eci.plazapp.back;
 
 /**
  * Created by Jeffer on 27/10/2018.
@@ -7,18 +7,16 @@ package com.plazapp.eci.plazapp.app;
 public class User {
 
     private String userName;
-    private String nickName;
     private String email;
-    private String id;
-    private String rol;
     private int rating;
+    private String pass;
+    private String url;
 
-    public User(String id, String nickName, String userName, String email, String rol, String rating){
-        this.id= id;
+    public User(String userName, String email, String rating, String pass, String url){
         this.userName = userName;
-        this.nickName = nickName;
         this.email = email;
-        this.rol=rol;
+        this.pass = pass;
+        this.url = url;
         this.rating= intValueOf(rating);
     }
 
@@ -36,39 +34,31 @@ public class User {
         return userName;
     }
 
-    public String getNickName() {
-        return nickName;
-    }
-
     public String getEmail() {
         return email;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getRol() {
-        return rol;
     }
 
     public int getRating() {
         return rating;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setRol(String rol) {
-        this.rol = rol;
-    }
-
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    public boolean correctPass(String pswd) {
+        return this.pass.equals(pswd);
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
+    public String toString(){
+        return ("Name: "+this.userName+"\n"+"Email: "+this.email+"\n"+"Pass: "+this.pass);
     }
 }

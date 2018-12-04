@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:weightSum = "1"
     android:background="@drawable/register"
-    tools:context="com.plazapp.eci.plazapp.RegisterUser">
+    tools:context="com.plazapp.eci.plazapp.front.RegisterUser">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -67,15 +67,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="nick Name:" />
+            android:text="Contraseña" />
 
         <EditText
-            android:id="@+id/nickImput"
+            android:id="@+id/passInput"
             android:layout_width="340dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:inputType="textPassword" />
 
         <TextView
             android:id="@+id/Foto"
