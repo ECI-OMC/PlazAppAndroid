@@ -18,23 +18,26 @@
 
         <!-- android:theme="@style/AppTheme" -->
         <activity android:name=".front.PlazApp">
+            android:screenOrientation="portrait"
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".front.LoginActivity"
             android:label="Login"
             android:theme="@style/AppFullScreenTheme"
             />
         <activity
-        android:name=".front.RegisterUser"
-        android:label="Register"
-        android:theme="@style/AppFullScreenTheme"
+            android:screenOrientation="portrait"
+            android:name=".front.RegisterUser"
+            android:label="Register"
+            android:theme="@style/AppFullScreenTheme"
         />
         <activity
+            android:screenOrientation="portrait"
             android:name=".front.Index"
             android:label="Index"
             android:theme="@style/AppFullScreenTheme"

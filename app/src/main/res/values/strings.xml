@@ -6,4 +6,17 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <string name="vender">Vende</string>
+    <string name="comprar">Compra</string>
+    <string name="info">Ayuda</string>
+    <string name="explora">Explora</string>
+
+    <string name="tittleRegister">Registrate ahora !</string>
+    <string name="nombreusuarioregistro">Digita tu nombre completo: </string>
+    <string name="correousuarioregistro">Digita tu correo: </string>
+    <string name="contraseñausuarioregistro">Digita una contraseña de registro</string>
+    <string name="contraseñausuario2registro">Repite la contraseña de registro</string>
+    <string name="seleccionaravatar">Selecciona un avatar (opcional)</string>
+    <string name="registrar">Registrate</string>
 </resources>

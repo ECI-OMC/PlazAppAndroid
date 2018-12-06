@@ -1,167 +1,193 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum = "1"
     android:background="@drawable/register"
-    tools:context="com.plazapp.eci.plazapp.front.RegisterUser">
+    tools:context="com.plazapp.eci.plazapp.front.RegisterUser"
+    >
 
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintGuide_percent="0.5"
+        android:id="@+id/midleV"
+        android:orientation="vertical"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintGuide_percent="0.01"
+        android:id="@+id/marginLeft"
+        android:orientation="vertical"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintGuide_percent="0.99"
+        android:id="@+id/marginRight"
+        android:orientation="vertical"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintGuide_percent="0.7"
+        android:id="@+id/midleH"
+        android:orientation="horizontal"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintGuide_percent="0.1"
+        android:id="@+id/firstSection"
+        android:orientation="horizontal"/>
+
+    <android.support.constraint.Guideline
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintGuide_percent="0.85"
+        android:id="@+id/secondSection"
+        android:orientation="horizontal"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/leftQuart"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintGuide_percent="0.25"
+        android:orientation="vertical" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/rigthQuart"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintGuide_percent="0.75"
+        android:orientation="vertical" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/firstSection"
+        android:text="@string/tittleRegister"
+        android:theme="@style/tittleWhite"
+        android:background="@color/colorAccent"/>
+    
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:background="@color/colorAccent">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Registrate Ahora!"
-            android:textSize="20dp"
-            android:textColor="@color/fontWhite"
-            android:gravity="center_horizontal"
-            />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/firstSection"
+        app:layout_constraintBottom_toTopOf="@id/midleH"
+        android:layout_marginTop="20dp"
         android:orientation="vertical"
-        android:padding="10dp"
-        android:layout_marginTop="50dp">
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
         <TextView
-            android:id="@+id/name"
-            android:layout_width="match_parent"
+            android:id="@+id/userNameLabel"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Nombre Completo" />
+            android:text="@string/nombreusuarioregistro"
+            android:theme="@style/fontTextDark"/>
 
         <EditText
-            android:id="@+id/nameImput"
-            android:layout_width="340dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:ems="10"
-            android:inputType="textPersonName" />
-
-        <TextView
-            android:id="@+id/email"
+            android:id="@+id/nameInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="email:" />
+            android:inputType="text"
+            android:theme="@style/ediTextlight"/>
+
+        <TextView
+            android:id="@+id/labelEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/correousuarioregistro"
+            android:theme="@style/fontTextDark"/>
 
         <EditText
-            android:id="@+id/emailImput"
-            android:layout_width="340dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:ems="10"
-            android:inputType="textPersonName" />
-
-        <TextView
-            android:id="@+id/NombreUsuario"
+            android:id="@+id/emailInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Contraseña" />
+            android:inputType="textEmailAddress"
+            android:theme="@style/ediTextlight"/>
+
+        <TextView
+            android:id="@+id/passLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/contraseñausuarioregistro"
+            android:theme="@style/fontTextDark"/>
+
+        <TextView
+            android:id="@+id/informerPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/passLabel"
+            app:layout_constraintTop_toBottomOf="@id/passInput"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="0dp" />
 
         <EditText
             android:id="@+id/passInput"
-            android:layout_width="340dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:ems="10"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:theme="@style/ediTextlight"/>
 
         <TextView
-            android:id="@+id/Foto"
+            android:id="@+id/informer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="Suba una foto:" />
+            app:layout_constraintBottom_toTopOf="@id/textPass2"
+            app:layout_constraintTop_toBottomOf="@id/passInput"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="0dp" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/textPass2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/contraseñausuario2registro"
+            android:theme="@style/fontTextDark"/>
+
+        <EditText
+            android:id="@+id/passInput2"
             android:layout_width="match_parent"
-            android:layout_height="216dp"
-            android:layout_marginTop="20dp"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:baselineAligned="true"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal"
-                android:paddingBottom="10dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="52dp"
-                        android:layout_height="60dp"
-                        app:srcCompat="@drawable/upload" />
-
-                    <Button
-                        android:id="@+id/button2"
-                        android:layout_width="140dp"
-                        android:layout_height="50dp"
-                        android:layout_marginHorizontal="10dp"
-                        android:text="Subir" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="52dp"
-                        android:layout_height="60dp"
-                        app:srcCompat="@drawable/camera" />
-
-                    <Button
-                        android:id="@+id/button"
-                        android:layout_width="140dp"
-                        android:layout_height="50dp"
-                        android:layout_marginHorizontal="10dp"
-                        android:text="Tomar" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="299dp"
-                android:layout_height="46dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/colorAccent"
-                android:onClick="registrar"
-                android:text="Registrarse"
-                android:textColor="@color/fontWhite" />
-
-            <TextView
-                android:layout_marginTop="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Volver"
-                android:textSize="17dp"
-                android:layout_gravity="center_horizontal"
-                android:clickable="true"
-                android:onClick="goBack"/>
-
-        </LinearLayout>
-
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:theme="@style/ediTextlight"/>
 
     </LinearLayout>
-</RelativeLayout>
+
+    <!--LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/midleH"
+        app:layout_constraintBottom_toTopOf="@id/secondSection"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/seleccionaravatar"
+            android:theme="@style/fontTextDark"/>
+
+
+    </LinearLayout-->
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="2dp"
+        android:foregroundGravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/leftQuart"
+        app:layout_constraintRight_toRightOf="@id/rigthQuart"
+        app:layout_constraintTop_toBottomOf="@id/secondSection"
+        android:text="@string/registrar"
+        android:onClick="registrar"/>
+</android.support.constraint.ConstraintLayout>

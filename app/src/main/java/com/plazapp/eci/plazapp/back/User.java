@@ -10,13 +10,11 @@ public class User {
     private String email;
     private int rating;
     private String pass;
-    private String url;
 
-    public User(String userName, String email, String rating, String pass, String url){
+    public User(String userName, String email, String rating, String pass){
         this.userName = userName;
         this.email = email;
         this.pass = pass;
-        this.url = url;
         this.rating= intValueOf(rating);
     }
 
@@ -52,6 +50,10 @@ public class User {
 
     public boolean correctPass(String pswd) {
         return this.pass.equals(pswd);
+    }
+
+    public String getPass(){
+        return pass;
     }
 
     public void setPass(String pass) {

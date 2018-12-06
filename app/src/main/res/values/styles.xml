@@ -10,20 +10,54 @@
     </style>
 
     <style name="tittle">
+    <item name="android:textSize">30dp</item>
+    <item name="android:textColor">@color/colorAccent</item>
+    <item name="android:gravity">center</item>
+</style>
+
+    <style name="tittleWhite">
         <item name="android:textSize">30dp</item>
-        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/fontWhite</item>
         <item name="android:gravity">center</item>
     </style>
 
     <style name="tittleContrast">
         <item name="android:textSize">30dp</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/fontWhite</item>
-        <item name="android:gravity">center_vertical</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@color/colorAccent</item>
     </style>
 
+    <style name="bwsc">
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:textStyle">italic|bold</item>
+        <item name="android:textColor">@color/fontWhite</item>
+        <item name="android:textSize">25dp</item>
+    </style>
+
+    <style name="fontTextWhite">
+        <item name="android:textColor">@color/fontWhite</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <style name="fontTextDark">
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:textColor">@color/darkBlue</item>
+        <item name="android:textSize">20dp</item>
+    </style>
 
     <style name="AppFullScreenTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppFullScreenTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="ediTextlight">
+        <item name="android:background">@color/colorAccent</item>
+        <item name="android:textColor">@color/fontWhite</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:layout_marginBottom">6dp</item>
+    </style>
 
 </resources>

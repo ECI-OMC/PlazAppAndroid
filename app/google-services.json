@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "438400279597",
+    "firebase_url": "https://plazapp-escuelaing.firebaseio.com",
+    "project_id": "plazapp-escuelaing",
+    "storage_bucket": "plazapp-escuelaing.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:438400279597:android:1d99e863ec5a0902",
+        "android_client_info": {
+          "package_name": "com.plazapp.eci.plazapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "438400279597-nt4n0fmrikhcfa5mcfq1catk9to0v9sh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.plazapp.eci.plazapp",
+            "certificate_hash": "41b1626cb9a6e70adab25c50ff33fe4b308cbfba"
+          }
+        },
+        {
+          "client_id": "438400279597-6a4h6t5h996hko5a3ro1s27s4si0aiq0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAW4yh4bEYFjzLAz0a6SHNa4bFCiO7WevY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "438400279597-6a4h6t5h996hko5a3ro1s27s4si0aiq0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

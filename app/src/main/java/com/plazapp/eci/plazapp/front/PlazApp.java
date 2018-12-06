@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.plazapp.eci.plazapp.R;
-import com.plazapp.eci.plazapp.back.App;
+import com.plazapp.eci.plazapp.back.Db_Manager;
 
 /**
  * Created by Jeffer on 29/10/2018.
@@ -14,10 +14,8 @@ import com.plazapp.eci.plazapp.back.App;
 
 public class PlazApp extends AppCompatActivity{
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        App.initialize();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.plazapp_layout);
     }
@@ -28,17 +26,36 @@ public class PlazApp extends AppCompatActivity{
             startActivity(new Intent(PlazApp.this, LoginActivity.class));
     }
 
-    public static final boolean loginApp(String un, String pswd){
-        boolean ans = App.handleLogin(un,pswd);
-        return ans;
+    public static final void loginApp(String un, String pswd){
+        Db_Manager.login(un,pswd);
     }
 
-    public static final boolean registerUser(String userName,String email, String rating, String url, String pass){
-        return App.handleRegister(userName,email,rating,pass, url);
+    public static final void registerUser(String userName,String email, String rating, String pass){
+        Db_Manager.insertUser(userName,email,rating,pass);
     }
 
     public static String getNameCurrentUser(){
-        return App.currentUser().getUserName();
+        return Db_Manager.getCurrent().getUserName();
     }
 
+    public static String getEmailCurrentUser(){
+        return Db_Manager.getCurrent().getEmail();
+    }
+
+    public static void notifyUserRegistered(boolean status) {
+        RegisterUser.notifyFromServer(status);
+    }
+
+
+    public static void tryRegister(String name, String email, String pass, String rating) {
+        Db_Manager.tryRegister( name, email, pass, rating);
+    }
+
+    public static void userExist() {
+        RegisterUser.notifyUserExist();
+    }
+
+    public static void notifyFromServer(boolean b) {
+        LoginActivity.notifyFromServer(b);
+    }
 }
