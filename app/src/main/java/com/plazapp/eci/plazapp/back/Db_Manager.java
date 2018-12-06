@@ -51,8 +51,7 @@ public class Db_Manager {
         };
         userNameRef.addListenerForSingleValueEvent(eventListener);
     }
-
-
+    
     private static void verifyIsRegistered(String email) {
         DatabaseReference userNameRef = myRef.child(email);
         ValueEventListener eventListener = new ValueEventListener() {
@@ -72,6 +71,32 @@ public class Db_Manager {
         userNameRef.addListenerForSingleValueEvent(eventListener);
     }
 
+    public static void login(String email, final String pswd){
+        myRef = database.getReference(routeUsers);
+        final DatabaseReference userNameRef = myRef.child(emailFlat(email));
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                boolean ans = false;
+                if(dataSnapshot.exists()) {
+                    String userName = dataSnapshot.child("userName").getValue().toString();
+                    String email = dataSnapshot.child("email").getValue().toString();
+                    String rating = dataSnapshot.child("rating").getValue().toString();
+                    String pass = dataSnapshot.child("pass").getValue().toString();
+                    ans = pswd.equals(pass);
+                    if (ans){
+                        current = new User(userName,email,rating,pass);
+                    }
+                }
+                PlazApp.loginStatus(ans);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+
+        };
+        userNameRef.addListenerForSingleValueEvent(eventListener);
+    }
 
     private static String emailFlat(String email){
         String[] ef = email.split("\\.");
@@ -84,26 +109,6 @@ public class Db_Manager {
 
     public static void insertSale(User buyer, User seller, Product product){
         //
-    }
-
-    public static void login(String email, String pswd){
-        DatabaseReference userNameRef = database.getReference(routeUsers).child(emailFlat(email));
-        ValueEventListener eventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()) {
-
-                    PlazApp.userExist();
-                }else{
-                    PlazApp.notifyFromServer(false);
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-
-        };
-        userNameRef.addListenerForSingleValueEvent(eventListener);
     }
 
     private static boolean userExist(String email){

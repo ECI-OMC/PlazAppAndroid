@@ -14,6 +14,7 @@ import com.plazapp.eci.plazapp.R;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private static LoginActivity reference;
     private EditText userName;
     private EditText userPass;
     private TextView register;
@@ -21,14 +22,25 @@ public class LoginActivity extends AppCompatActivity {
     private String user = "customer";
     private String passUser = "123456";
     private static AlertDialog alertDialog;
+    private static Intent index;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        reference = this;
+        index = new Intent(LoginActivity.this, Index.class);
         alertDialog = new AlertDialog.Builder(LoginActivity.this).create();
         setContentView(R.layout.activity_login);
         userName = findViewById(R.id.userN);
         userPass = findViewById(R.id.userPas);
+    }
+
+    public void loginSuccesfull(){
+        startActivity(index);
+    }
+
+    public static void loginFailed(){
+        dialog("No se pudo iniciar sesion","Error, el usuario o la contrraseña no son validos");
     }
 
     private static void dialog (String tittle, String message){
@@ -43,22 +55,12 @@ public class LoginActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+    public static final LoginActivity getInstance(){
+        return reference;
+    }
 
     public void loginUser(View v){
         PlazApp.loginApp(userName.getText().toString(), userPass.getText().toString());
-    }
-
-    private void logInSuccesfull(){
-        startActivity(new Intent(LoginActivity.this, Index.class));
-    }
-
-    public static void notifyFromServer(boolean ans){
-        if (ans){
-            LoginActivity login = new LoginActivity();
-            login.logInSuccesfull();
-        }else{
-            dialog("Error","Los datos ingreados no son validos...");
-        }
     }
 
     public void registerUser(View v){

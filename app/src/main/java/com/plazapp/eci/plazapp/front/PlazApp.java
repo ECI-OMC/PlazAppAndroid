@@ -3,6 +3,7 @@ package com.plazapp.eci.plazapp.front;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.plazapp.eci.plazapp.R;
 import com.plazapp.eci.plazapp.back.Db_Manager;
@@ -14,16 +15,19 @@ import com.plazapp.eci.plazapp.back.Db_Manager;
 
 public class PlazApp extends AppCompatActivity{
 
+    private static Intent la;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.plazapp_layout);
+        la = new Intent(PlazApp.this,LoginActivity.class);
     }
 
     @Override
     protected void onStart(){
         super.onStart();
-            startActivity(new Intent(PlazApp.this, LoginActivity.class));
+        startActivity(la);
     }
 
     public static final void loginApp(String un, String pswd){
@@ -55,7 +59,11 @@ public class PlazApp extends AppCompatActivity{
         RegisterUser.notifyUserExist();
     }
 
-    public static void notifyFromServer(boolean b) {
-        LoginActivity.notifyFromServer(b);
+    public static void loginStatus(boolean status) {
+        if (status){
+            LoginActivity.getInstance().loginSuccesfull();
+        }else{
+            LoginActivity.loginFailed();
+        }
     }
 }
