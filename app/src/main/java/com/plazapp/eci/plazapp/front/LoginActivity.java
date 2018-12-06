@@ -3,6 +3,8 @@ package com.plazapp.eci.plazapp.front;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,12 +23,23 @@ public class LoginActivity extends AppCompatActivity {
     private Button login;
     private String user = "customer";
     private String passUser = "123456";
-    private static AlertDialog alertDialog;
+    private static AlertDialog alertDialog, cargando;
+
     private static Intent index;
 
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private void createLigthBox(){
+        AlertDialog.Builder  lightBox = new AlertDialog.Builder(this);
+        lightBox.setView(R.layout.ligthboxloading);
+        cargando = lightBox.create();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        createLigthBox();
         reference = this;
         index = new Intent(LoginActivity.this, Index.class);
         alertDialog = new AlertDialog.Builder(LoginActivity.this).create();
@@ -36,10 +49,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void loginSuccesfull(){
+        cargando.dismiss();
         startActivity(index);
     }
 
     public static void loginFailed(){
+        cargando.dismiss();
         dialog("No se pudo iniciar sesion","Error, el usuario o la contrraseña no son validos");
     }
 
@@ -61,6 +76,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void loginUser(View v){
         PlazApp.loginApp(userName.getText().toString(), userPass.getText().toString());
+        cargando.show();
     }
 
     public void registerUser(View v){

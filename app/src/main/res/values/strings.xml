@@ -1,17 +1,20 @@
 <resources>
     <string name="app_name">PlazApp</string>
     <string name="title_activity_user_index">UserIndex</string>
+    <string name="cargando">Cargando...</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
 
+    <!-- area de menu-->
     <string name="vender">Vende</string>
     <string name="comprar">Compra</string>
     <string name="info">Ayuda</string>
     <string name="explora">Explora</string>
 
+    <!-- Area de Registro-->
     <string name="tittleRegister">Registrate ahora !</string>
     <string name="nombreusuarioregistro">Digita tu nombre completo: </string>
     <string name="correousuarioregistro">Digita tu correo: </string>
@@ -19,4 +22,13 @@
     <string name="contraseñausuario2registro">Repite la contraseña de registro</string>
     <string name="seleccionaravatar">Selecciona un avatar (opcional)</string>
     <string name="registrar">Registrate</string>
+
+    <!--area de venta-->
+    <string name="tipoPorducto">Selecciona la clase de producto</string>
+    <string name="producto">Seleccion el producto</string>
+    <string name="unidad">¿Como cuantificas el producto?</string>
+    <string name="cantidad">¿Cuanto deseas vender?</string>
+    <string name="descripcion">¿Algo que le quieras decir a tu cliente sobre tu producto?</string>
+    <string name="vende">Ofrecer producto</string>
+
 </resources>

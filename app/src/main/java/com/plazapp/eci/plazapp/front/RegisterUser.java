@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -19,11 +21,12 @@ public class RegisterUser extends AppCompatActivity {
     private static EditText userName,email,pass,pass2;
     private static TextView alertIncorrectPass, alertIncorrectPassL;
     private String photoSrc;
-    private static AlertDialog alertDialog;
+    private static AlertDialog alertDialog, cargando;
     private String dialogTittle;
     private String dialogMessage;
     private static boolean close;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void initialize(){
         alertDialog = new AlertDialog.Builder(RegisterUser.this).create();
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
@@ -83,11 +86,19 @@ public class RegisterUser extends AppCompatActivity {
 
             }
         });
-
         dialogMessage="";
         dialogTittle="";
+        createLigthBox();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private void createLigthBox(){
+        AlertDialog.Builder lightBox = new AlertDialog.Builder(this);
+        lightBox.setView(R.layout.ligthboxloading);
+        cargando = lightBox.create();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,6 +135,7 @@ public class RegisterUser extends AppCompatActivity {
         close = false;
         if (validateUserInfo(userName.getText().toString(),email.getText().toString(),pass.getText().toString())) {
             PlazApp.tryRegister(userName.getText().toString(), email.getText().toString(), pass.getText().toString(),"0");
+            cargando.show();
         }else{
             alertDialog.setTitle(dialogTittle);
             alertDialog.setMessage(dialogMessage);
@@ -141,6 +153,7 @@ public class RegisterUser extends AppCompatActivity {
     }
 
     public static void notifyFromServer(boolean statusRegistered){
+        cargando.dismiss();
         if (statusRegistered){
             close=true;
             alertDialog.setTitle("Registro Exitoso!");
@@ -154,11 +167,8 @@ public class RegisterUser extends AppCompatActivity {
         clear();
     }
 
-    private void showLightBox(){
-
-    }
-
     public static void notifyUserExist() {
+        cargando.dismiss();
         alertDialog.setTitle("Registro Fallido!");
         alertDialog.setMessage("El correo ya se encuentra asociado a una cuenta. intente con otro");
         alertDialog.show();

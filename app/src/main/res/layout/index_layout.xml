@@ -110,7 +110,9 @@
         app:layout_constraintRight_toLeftOf="@id/midle"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="5dp"
-        android:background="@color/colorAccent">
+        android:background="@color/colorAccent"
+        android:clickable="true"
+        android:onClick="vender">
 
             <ImageView
                 android:id="@+id/imageView3"
@@ -139,7 +141,9 @@
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="5dp"
         app:layout_constraintRight_toRightOf="parent"
-        android:background="@color/colorAccent">
+        android:background="@color/colorAccent"
+        android:clickable="true"
+        android:onClick="news">
 
         <ImageView
             android:id="@+id/imageView4"
@@ -168,7 +172,8 @@
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="5dp"
         android:background="@color/colorAccent"
-        >
+        android:clickable="true"
+        android:onClick="navega">
          <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="102dp"
@@ -195,7 +200,9 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="5dp"
-        android:background="@color/colorAccent">
+        android:background="@color/colorAccent"
+        android:clickable="true"
+        android:onClick="info">
 
             <ImageView
                 android:id="@+id/imageView5"

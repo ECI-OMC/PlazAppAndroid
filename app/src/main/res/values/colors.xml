@@ -7,5 +7,6 @@
     <color name="darkBlue">#00131C</color>
     <color name="red">#FF0000</color>
     <color name="green">#00FFC5</color>
+    <color name="lightBox">#ffffff</color>
 
 </resources>

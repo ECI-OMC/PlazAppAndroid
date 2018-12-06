@@ -48,6 +48,11 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
     }
 
     @Override
+    public void onBackPressed (){
+
+    }
+
+    @Override
     public boolean onNavigationItemSelected(MenuItem item){
         // Handle navigation view item clicks here.
         int id = item.getItemId();
@@ -72,12 +77,11 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
     }
 
     public void vender(View v){
-        startActivity(new Intent(Index.this, Index.class));
+        startActivity(new Intent(Index.this, Sale.class));
     }
 
     public void navega(View v){
         startActivity(new Intent(Index.this, Index.class));
-
     }
 
     public void info(View v){

@@ -42,6 +42,30 @@
             android:label="Index"
             android:theme="@style/AppFullScreenTheme"
             />
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".front.Sale"
+            android:label="Sales"
+            android:theme="@style/AppFullScreenTheme"
+            />
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".front.News"
+            android:label="News"
+            android:theme="@style/AppFullScreenTheme"
+            />
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".front.Info"
+            android:label="Info"
+            android:theme="@style/AppFullScreenTheme"
+            />
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".front.Navigate"
+            android:label="Navigate"
+            android:theme="@style/AppFullScreenTheme"
+            />
     </application>
 
 </manifest>

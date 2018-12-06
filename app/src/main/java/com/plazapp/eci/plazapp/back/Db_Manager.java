@@ -51,7 +51,7 @@ public class Db_Manager {
         };
         userNameRef.addListenerForSingleValueEvent(eventListener);
     }
-    
+
     private static void verifyIsRegistered(String email) {
         DatabaseReference userNameRef = myRef.child(email);
         ValueEventListener eventListener = new ValueEventListener() {

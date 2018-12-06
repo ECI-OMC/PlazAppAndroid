@@ -20,7 +20,7 @@ public class Sale extends AppCompatActivity {
     public void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sales_layout);
-        List<String> spinnerArray =  new ArrayList<String>();
+        /**List<String> spinnerArray =  new ArrayList<String>();
         spinnerArray.add("Verdura");
         spinnerArray.add("Granos");
         spinnerArray.add("Frutas");
@@ -67,7 +67,7 @@ public class Sale extends AppCompatActivity {
                 this, android.R.layout.simple_spinner_item, grano);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner sItems4 = findViewById(R.id.tipo);
-        sItems4.setAdapter(adapter4);
+        sItems4.setAdapter(adapter4);**/
 
 
     }
