@@ -8,6 +8,8 @@ import android.util.Log;
 import com.plazapp.eci.plazapp.R;
 import com.plazapp.eci.plazapp.back.Db_Manager;
 
+import java.util.ArrayList;
+
 /**
  * Created by Jeffer on 29/10/2018.
  * esta es la que se crea de primeras
@@ -50,6 +52,17 @@ public class PlazApp extends AppCompatActivity{
         RegisterUser.notifyFromServer(status);
     }
 
+    public static void notifyChargedTypos(ArrayList<String> typos){
+        Sale.getInstance().poblateTypos(typos);
+    }
+
+    public static void notifyChargedProducts(ArrayList<String> populate) {
+        Sale.getInstance().poblateProduct(populate);
+    }
+
+    public static void notifyChargedMeasure(ArrayList<String> populate) {
+        Sale.getInstance().poblateMeasures(populate);
+    }
 
     public static void tryRegister(String name, String email, String pass, String rating) {
         Db_Manager.tryRegister( name, email, pass, rating);
@@ -66,4 +79,22 @@ public class PlazApp extends AppCompatActivity{
             LoginActivity.loginFailed();
         }
     }
+
+    public static void addTypo(String send) {
+        Db_Manager.addTypo(send);
+    }
+
+    public static void addProduct(String send, String type) {
+        Db_Manager.addProduct(send, type);
+    }
+
+    public static void addMeasure(String send) {
+        Db_Manager.addMeasure(send);
+    }
+
+    public static void poblateSales() {
+        Db_Manager.getProducts();
+        Db_Manager.getMeasures();
+    }
+
 }

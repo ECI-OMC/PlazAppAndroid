@@ -7,7 +7,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.plazapp.eci.plazapp.front.PlazApp;
 
-import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Created by Jeffer on 4/12/2018.
@@ -19,11 +21,59 @@ public class Db_Manager {
     private static final String routeProducts = "products";
     private static final String routeSellXproducts = "userXproduct";
     private static final String routeConsumerXproduct = "consumerXproduct";
+    private static final String routeMeasure = "measure";
     private static FirebaseDatabase database = FirebaseDatabase.getInstance();
     private static DatabaseReference myRef ;
     private static boolean isLogged = false;
     private static User current;
 
+
+    public static void getProducts(){
+        DatabaseReference userNameRef = database.getReference(routeProducts);
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()) {
+                    Iterable<DataSnapshot> typos = dataSnapshot.getChildren();
+                    ArrayList<String> populate = new ArrayList<>();
+                    for (DataSnapshot type : typos){
+                        populate.add(type.getValue().toString());
+                    }
+                    PlazApp.notifyChargedTypos(populate);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+
+        };
+        userNameRef.addListenerForSingleValueEvent(eventListener);
+    }
+
+    public static void getMeasures() {
+
+        DatabaseReference userNameRef = database.getReference(routeMeasure);
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()) {
+                    Iterable<DataSnapshot> products = dataSnapshot.getChildren();
+                    ArrayList<String> populate = new ArrayList<>();
+                    for (DataSnapshot type : products){
+                        populate.add(type.getValue().toString());
+                    }
+                    PlazApp.notifyChargedMeasure(populate);
+                }else{
+                    //insertTypos();
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+
+        };
+        userNameRef.addListenerForSingleValueEvent(eventListener);
+    }
 
     public static void insertUser(String userName, String email, String rating, String pass){
         User user = new User(userName, email, rating, pass);
@@ -103,12 +153,10 @@ public class Db_Manager {
         return ef[0]+ef[1];
     }
 
-    public static void insertProduct(Product product){
-        myRef = database.getReference(routeProducts);
-    }
-
-    public static void insertSale(User buyer, User seller, Product product){
-        //
+    public static void insertProduct(Product product, String email){
+        myRef = database.getReference(routeSellXproducts);
+        String id = myRef.push().getKey();
+        myRef.child(email).child(id).setValue(product);
     }
 
     private static boolean userExist(String email){
@@ -121,6 +169,26 @@ public class Db_Manager {
 
     public static User getCurrent(){
         return current;
+    }
+
+    public static void addTypo(String send) {
+        myRef = database.getReference(routeProducts);
+        String id = myRef.push().getKey();
+        myRef.child(id).setValue(send);
+        getProducts();
+    }
+
+    public static void addProduct(String send, String typo) {
+        myRef = database.getReference(routeProducts);
+        String id = myRef.push().getKey();
+        myRef.child(typo).child(id).setValue(send);
+        getProducts();
+    }
+
+    public static void addMeasure(String send) {
+        myRef = database.getReference(routeMeasure);
+        String id = myRef.push().getKey();
+        myRef.child(id).setValue(send);
     }
 
 }

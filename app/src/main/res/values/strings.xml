@@ -30,5 +30,7 @@
     <string name="cantidad">¿Cuanto deseas vender?</string>
     <string name="descripcion">¿Algo que le quieras decir a tu cliente sobre tu producto?</string>
     <string name="vende">Ofrecer producto</string>
+    <string name="tittle_sale">Ofrece tu producto</string>
+    <string name="ingresa_un_tipo_ej_verdura">ingresa un tipo. Ej (Verdura...)</string>
 
 </resources>
