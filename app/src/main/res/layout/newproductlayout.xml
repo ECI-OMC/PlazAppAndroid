@@ -1,46 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/back_alert"
+    android:padding="15dp">
 
     <TextView
         android:id="@+id/tittle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Registra"
+        android:text="@string/r_n_p"
         android:theme="@style/tittle"/>
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:theme="@style/tittle"/>
 
     <TextView
+        android:id="@+id/fl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="seleccione el tipo de producto"/>
-
-    <Spinner
-        android:id="@+id/types"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></Spinner>
+        android:theme="@style/fontTextDark"
+        app:layout_constraintTop_toBottomOf="@id/tittle"/>
 
     <TextView
+        android:id="@+id/sc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/i_p"
+        android:theme="@style/fontTextDark"
         android:layout_marginTop="15dp"
-        android:text="Ingrese el producto"/>
+        app:layout_constraintTop_toBottomOf="@id/fl" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/newProduct" />
+        android:id="@+id/newProduct"
+        app:layout_constraintTop_toBottomOf="@id/sc"
+        android:hint="@string/i_p"/>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="newProduct"/>
-</LinearLayout>
+        android:onClick="newProduct"
+        android:text="@string/r_n_p"
+        android:theme="@style/darkButton"
+        android:background="@color/colorAccent"
+        app:layout_constraintTop_toBottomOf="@id/newProduct"/>
+
+</android.support.constraint.ConstraintLayout>

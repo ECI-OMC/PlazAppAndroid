@@ -84,17 +84,22 @@ public class PlazApp extends AppCompatActivity{
         Db_Manager.addTypo(send);
     }
 
+    public static  void getProductsOfType(String type){
+        Db_Manager.getProducts(type);
+    }
+
     public static void addProduct(String send, String type) {
         Db_Manager.addProduct(send, type);
     }
 
-    public static void addMeasure(String send) {
-        Db_Manager.addMeasure(send);
+    public static void addMeasure(String send, String prefix) {
+        Db_Manager.addMeasure(send, prefix);
     }
 
     public static void poblateSales() {
-        Db_Manager.getProducts();
+        Db_Manager.getTypes();
         Db_Manager.getMeasures();
+        Sale.completed();
     }
 
 }

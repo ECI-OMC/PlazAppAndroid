@@ -32,5 +32,18 @@
     <string name="vende">Ofrecer producto</string>
     <string name="tittle_sale">Ofrece tu producto</string>
     <string name="ingresa_un_tipo_ej_verdura">ingresa un tipo. Ej (Verdura...)</string>
+    <string name="ingresa_un_nuevo_tipo">Ingresa un nuevo tipo</string>
+    <string name="registrar_nuevo_tipo">Registrar nuevo tipo</string>
+    <string name="r_n_p">Registra un nuevo producto</string>
+    <string name="s_t_p">seleccione el tipo de producto</string>
+    <string name="i_p">Ingrese el nombre del producto</string>
+    <string name="d_t">Digita el tipo</string>
+    <string name="desc_typo">Da una descripcion breve del tipo</string>
+    <string name="b_d_p">Breve descripcion del producto</string>
+    <string name="inputmeasue">Ingresa la unidad de medida</string>
+    <string name="registrymeasure">Registra una nueva unidad de medida</string>
+    <string name="nameunitmeasure">nombre de la unidad de medida</string>
+    <string name="prefixHintmeasure"><![CDATA[Ingrese el prefijo p.e (Kilogramos -> kg)]]></string>
+    <string name="rnm">Registra una nueva medida</string>
 
 </resources>

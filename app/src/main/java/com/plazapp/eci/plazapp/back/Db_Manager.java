@@ -8,7 +8,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.plazapp.eci.plazapp.front.PlazApp;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -28,19 +27,35 @@ public class Db_Manager {
     private static User current;
 
 
-    public static void getProducts(){
+    public static void getTypes(){
         DatabaseReference userNameRef = database.getReference(routeProducts);
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<String> populate = new ArrayList<>();
                 if(dataSnapshot.exists()) {
                     Iterable<DataSnapshot> typos = dataSnapshot.getChildren();
-                    ArrayList<String> populate = new ArrayList<>();
                     for (DataSnapshot type : typos){
-                        populate.add(type.getValue().toString());
+                        populate.add(type.getKey().toString());
                     }
-                    PlazApp.notifyChargedTypos(populate);
                 }
+                PlazApp.notifyChargedTypos(populate);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+
+        };
+        userNameRef.addListenerForSingleValueEvent(eventListener);
+    }
+
+    public static void getProducts(String typo){
+        DatabaseReference userNameRef = database.getReference(routeProducts).child(typo);
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<String> products = (ArrayList<String>) dataSnapshot.child("products").getValue();
+                PlazApp.notifyChargedProducts(products);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -56,16 +71,15 @@ public class Db_Manager {
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> measures = dataSnapshot.getChildren();
+                ArrayList<String> populate = new ArrayList<>();
                 if(dataSnapshot.exists()) {
-                    Iterable<DataSnapshot> products = dataSnapshot.getChildren();
-                    ArrayList<String> populate = new ArrayList<>();
-                    for (DataSnapshot type : products){
-                        populate.add(type.getValue().toString());
+                    for (DataSnapshot measure : measures){
+                        String var = measure.child("name").getValue().toString() + " (" +measure.child("prefix").getValue().toString()+")";
+                        populate.add(var);
                     }
-                    PlazApp.notifyChargedMeasure(populate);
-                }else{
-                    //insertTypos();
                 }
+                PlazApp.notifyChargedMeasure(populate);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -173,22 +187,40 @@ public class Db_Manager {
 
     public static void addTypo(String send) {
         myRef = database.getReference(routeProducts);
-        String id = myRef.push().getKey();
-        myRef.child(id).setValue(send);
-        getProducts();
+        myRef.child(send).setValue(new TypeProduct( new ArrayList<String>(),send));
+        getTypes();
     }
 
-    public static void addProduct(String send, String typo) {
-        myRef = database.getReference(routeProducts);
-        String id = myRef.push().getKey();
-        myRef.child(typo).child(id).setValue(send);
-        getProducts();
+
+    public static void addProduct(final String send,  final String typo) {
+        DatabaseReference userNameRef = database.getReference(routeProducts).child(typo);
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<String> products;
+                if (dataSnapshot.exists() && dataSnapshot.child("products").getValue()!=null) {
+                     products = (ArrayList<String>) dataSnapshot.child("products").getValue();
+                }else{
+                    products = new ArrayList<>();
+                }
+                products.add(send);
+                myRef = database.getReference(routeProducts).child(typo).child("products");
+                myRef.setValue(products);
+                getProducts(typo);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+
+        };
+        userNameRef.addListenerForSingleValueEvent(eventListener);
+
     }
 
-    public static void addMeasure(String send) {
-        myRef = database.getReference(routeMeasure);
-        String id = myRef.push().getKey();
-        myRef.child(id).setValue(send);
+    public static void addMeasure(String send, String prefix) {
+        database.getReference(routeMeasure).child(send).setValue(new Measure(send,prefix));
+        getMeasures();
+
     }
 
 }

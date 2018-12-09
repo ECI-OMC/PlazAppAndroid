@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".front.Sale"
+    android:background="@drawable/back_alert"
+    android:padding="15dp">
+
+    <TextView
+        android:id="@+id/tittle"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ingresa_un_nuevo_tipo"
+        android:theme="@style/tittleContrast" />
+
+        <EditText
+            android:id="@+id/textfield"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/ingresa_un_tipo_ej_verdura"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintTop_toBottomOf="@id/tittle"/>
+
+    <EditText
+        android:id="@+id/textfield2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/desc_typo"
+        android:inputType="textMultiLine"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintTop_toBottomOf="@id/textfield"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="newType"
+        android:text="@string/registrar_nuevo_tipo"
+        android:layout_marginBottom="15dp"
+        android:theme="@style/darkButton"
+        android:background="@color/colorAccent"
+        app:layout_constraintTop_toBottomOf="@id/textfield2"/>
+
+
+</android.support.constraint.ConstraintLayout>
