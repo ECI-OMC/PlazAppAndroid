@@ -96,6 +96,8 @@ public class RegisterUser extends AppCompatActivity {
         AlertDialog.Builder lightBox = new AlertDialog.Builder(this);
         lightBox.setView(R.layout.ligthboxloading);
         cargando = lightBox.create();
+        cargando.setCanceledOnTouchOutside(false);
+        cargando.setCancelable(false);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)

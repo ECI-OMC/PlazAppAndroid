@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".front.Sale">
+    tools:context=".front.Sale"
+    android:background="@drawable/background_sale">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -59,15 +60,14 @@
             android:orientation="vertical"
             android:id="@+id/midleV"/>
 
-
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:text="@string/tittle_sale"
-            android:theme="@style/tittle"
+            android:theme="@style/tittleContrast"
             app:layout_constraintBottom_toTopOf="@id/startForm"
-            app:layout_constraintTop_toBottomOf="@+id/topM" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="0dp"
@@ -92,6 +92,20 @@
                 android:orientation="vertical"
                 android:id="@+id/ml"/>
 
+            <android.support.constraint.Guideline
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintGuide_percent="1"
+                android:orientation="horizontal"
+                android:id="@+id/end"/>
+
+            <android.support.constraint.Guideline
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:id="@+id/mid"
+                app:layout_constraintGuide_percent="0.5"
+                android:orientation="vertical"/>
+
             <TextView
                 android:id="@+id/fl"
                 android:layout_width="match_parent"
@@ -101,30 +115,17 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:theme="@style/fontTextDark"/>
 
-                <Spinner
-                    android:id="@+id/Typos"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/fl"
-                    app:layout_constraintRight_toLeftOf="@id/addMargin"
-                    android:layout_marginBottom="10dp"
-
-                    >
-                </Spinner>
-
-            <Button
-                android:id="@+id/addPt"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="@id/Typos"
-                app:layout_constraintLeft_toRightOf="@id/addMargin"
-                app:layout_constraintRight_toRightOf="@id/ml"
-                app:layout_constraintTop_toTopOf="@id/fl"
-                app:layout_constraintBottom_toTopOf="@id/sl"
-                android:text="+"
-                android:onClick="addTypo"
+            <Spinner
+                android:id="@+id/Typos"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/fl"
+                app:layout_constraintRight_toLeftOf="@id/addMargin"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginBottom="10dp"
+                android:theme="@style/darkButton"
+                android:gravity="start"
                 />
-
 
             <TextView
                 android:id="@+id/sl"
@@ -142,7 +143,9 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/sl"
                 app:layout_constraintRight_toLeftOf="@id/addMargin"
+                app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_marginBottom="10dp"
+                android:gravity="start"
                 >
             </Spinner>
 
@@ -155,10 +158,9 @@
                 app:layout_constraintTop_toTopOf="@id/sl"
                 app:layout_constraintBottom_toTopOf="@id/tl"
                 android:onClick="addProduct"
-                android:text="+"
+                android:text="@string/plus"
                 android:enabled="false"
                 />
-
 
             <TextView
                 android:id="@+id/tl"
@@ -175,7 +177,9 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/tl"
                 app:layout_constraintRight_toLeftOf="@id/addMargin"
-                android:layout_marginBottom="10dp">
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginBottom="10dp"
+                android:gravity="start">
             </Spinner>
 
             <Button
@@ -187,9 +191,8 @@
                 app:layout_constraintTop_toTopOf="@id/tl"
                 app:layout_constraintBottom_toTopOf="@id/mm"
                 android:onClick="addMeasure"
-                android:text="+"
+                android:text="@string/plus"
                 />
-
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/mm"
@@ -218,7 +221,8 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintLeft_toRightOf="@id/midle"
                     app:layout_constraintRight_toRightOf="parent"
-                    android:inputType="number"/>
+                    android:inputType="number"
+                    android:gravity="center"/>
 
             </android.support.constraint.ConstraintLayout>
 
@@ -234,14 +238,66 @@
             <EditText
                 android:id="@+id/description"
                 android:layout_width="match_parent"
-                android:layout_height="88dp"
-                app:layout_constraintTop_toBottomOf="@id/desclabel"
-                android:inputType="textMultiLine" />
+                android:layout_height="38dp"
+                android:inputType="textMultiLine"
+                app:layout_constraintTop_toBottomOf="@id/desclabel" />
 
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/priceLabel"
+                app:layout_constraintTop_toBottomOf="@id/description"
+                android:theme="@style/fontTextDark"/>
 
+            <EditText
+                android:id="@+id/price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/textView6"
+                android:inputType="number"
+                android:hint="@string/hintPrice"
+                android:gravity="center"/>
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:text="@string/add_geo"
+                app:layout_constraintBottom_toTopOf="@+id/end"
+                app:layout_constraintEnd_toStartOf="@+id/mid"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/price" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toBottomOf="@id/price"
+                app:layout_constraintBottom_toTopOf="@id/end"
+                app:layout_constraintLeft_toRightOf="@id/button"
+                app:layout_constraintRight_toRightOf="parent"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/precio_fijo"
+                    android:id="@+id/fixedPrice"
+                    />
+
+                <RadioButton
+                    android:id="@+id/noFixed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/negociable" />
+
+            </LinearLayout>
         </android.support.constraint.ConstraintLayout>
 
         <LinearLayout
+            android:id="@+id/buttonLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/endForm"
@@ -253,8 +309,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/vende"
-
-                android:gravity="center_horizontal"/>
+                android:gravity="center_horizontal"
+                android:onClick="createOffert"/>
         </LinearLayout>
     </android.support.constraint.ConstraintLayout>
 

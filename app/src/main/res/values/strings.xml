@@ -45,5 +45,14 @@
     <string name="nameunitmeasure">nombre de la unidad de medida</string>
     <string name="prefixHintmeasure"><![CDATA[Ingrese el prefijo p.e (Kilogramos -> kg)]]></string>
     <string name="rnm">Registra una nueva medida</string>
+    <string name="plus">+</string>
+    <string name="priceLabel">¿Cuanto Vale lo que ofreces?</string>
+    <string name="hintPrice">COP (Pesos Colombianos)</string>
+    <string name="add_geo">Agregar mi ubicación</string>
+    <string name="precio_fijo">Precio fijo</string>
+    <string name="negociable">Negociable</string>
+    <string name="ofertas_disponibles">Ofertas disponibles</string>
+    <string name="ofertname">OfertName</string>
+    <string name="todo">TODO</string>
 
 </resources>

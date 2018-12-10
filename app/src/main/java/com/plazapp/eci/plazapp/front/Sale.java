@@ -11,7 +11,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -25,16 +27,19 @@ import java.util.ArrayList;
 
 public class Sale extends AppCompatActivity {
 
-    private static String type,product, measure,quantity, desc;
+    private static String type,product, measure,quantity, desc, price, term, defaultStringType="Seleccione un tipo", defaultStringProduct="Seleccione un producto", defaultStringMeasure="Seleccione una unidad";
     private static Sale instance;
     private  static AlertDialog registro, cargando, error;
     private static AlertDialog.Builder instanceDialog;
+    private static ArrayAdapter<String> empty;
     private String toAdd;
 
     public void setCargando(){
         AlertDialog.Builder l= new AlertDialog.Builder(this);
         l.setView(R.layout.ligthboxloading);
         cargando=l.create();
+        cargando.setCanceledOnTouchOutside(false);
+        cargando.setCancelable(false);
     }
 
     public void getValues(){
@@ -48,10 +53,42 @@ public class Sale extends AppCompatActivity {
         quantity = texts.getText().toString();
         texts = findViewById(R.id.description);
         desc = texts.getText().toString();
+        texts = findViewById(R.id.price);
+        price = texts.getText().toString();
     }
 
+    public void registered(){
+        Spinner var =  findViewById(R.id.Typos);
+        var.setSelection(0);
+        var = findViewById(R.id.product);
+        var.setSelection(0);;
+        var = findViewById(R.id.measure);
+        var.setSelection(0);
+        EditText texts = findViewById(R.id.quantity);
+        texts.setText("");
+        texts = findViewById(R.id.description);
+        texts.setText("");
+        texts = findViewById(R.id.price);
+        texts.setText("");
+        RadioButton rb = findViewById(R.id.fixedPrice);
+        rb.setChecked(true);
+        rb = findViewById(R.id.noFixed);
+        rb.setChecked(false);
+    }
+
+    public void createOffert(View v){
+        cargando.show();
+        getValues();
+        boolean invalidData = type.equals(defaultStringType) || product.equals(defaultStringProduct) || measure.equals(defaultStringMeasure) || quantity.isEmpty() || price.isEmpty();
+        if (invalidData){
+            showPersonalized("Datos invalidos","serciorese de que todos los campos han sido llenados correctamente",R.drawable.alerta);
+        }else{
+            PlazApp.insertNewOffert(type,product,measure,quantity,desc, price, term);
+        }
+    }
 
     public static void showPersonalized(String tittle, String message, int icon){
+        completed();
         error.setTitle(tittle);
         error.setMessage(message);
         error.setIcon(icon);
@@ -61,9 +98,16 @@ public class Sale extends AppCompatActivity {
                         dialog.dismiss();
                     }
                 });
+        error.show();
     }
 
     private void initialize(){
+        ArrayList<String> reset = new ArrayList<>();
+        reset.add(defaultStringProduct);
+        empty = new ArrayAdapter<String>(
+                this, android.R.layout.simple_spinner_item, reset);
+        empty.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        resetProductsList();
         instanceDialog = new AlertDialog.Builder(this);
         error = instanceDialog.create();
         setCargando();
@@ -71,14 +115,15 @@ public class Sale extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                cargando.show();
-                if (!spinner.getSelectedItem().toString().equals("Selecciona un tipo")) {
+                if (!spinner.getSelectedItem().toString().equals(defaultStringType)) {
+                    cargando.show();
                     type = spinner.getSelectedItem().toString();
                     PlazApp.getProductsOfType(type);
                     findViewById(R.id.product).setEnabled(true);
                     findViewById(R.id.addpd).setEnabled(true);
                 }else{
                     type="";
+                    resetProductsList();
                     findViewById(R.id.product).setEnabled(false);
                     findViewById(R.id.addpd).setEnabled(false);
                 }
@@ -86,6 +131,28 @@ public class Sale extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 // your code here
+            }
+        });
+
+        RadioButton fixed = findViewById(R.id.fixedPrice);
+        fixed.setChecked(true);
+        fixed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RadioButton noFixed = findViewById(R.id.noFixed);
+                noFixed.setChecked(false);
+                term = "No negociable";
+            }
+
+        });
+
+        fixed = findViewById(R.id.noFixed);
+        fixed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RadioButton noFixed = findViewById(R.id.fixedPrice);
+                noFixed.setChecked(false);
+                term = "Negociable";
             }
         });
         cargando.show();
@@ -104,34 +171,48 @@ public class Sale extends AppCompatActivity {
         return instance;
     }
 
+    public void resetProductsList(){
+        Spinner sItems = findViewById(R.id.product);
+        sItems.setAdapter(empty);
+    }
+
     public void poblateTypos(ArrayList<String> typos){
-        typos.add(0,"Selecciona un tipo");
+        typos.add(0,defaultStringType);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this, android.R.layout.simple_spinner_item, typos);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner sItems = findViewById(R.id.Typos);
         sItems.setAdapter(adapter);
-        cargando.dismiss();
+        completed();
     }
 
     public void poblateProduct(ArrayList<String> products){
-        products.add(0,"Selecciona un producto");
+        if (products==null) {
+            products = new ArrayList<String>();
+        }
+        products.add(0, defaultStringProduct);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this, android.R.layout.simple_spinner_item, products);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner sItems = findViewById(R.id.product);
         sItems.setAdapter(adapter);
-        cargando.dismiss();
+        completed();
     }
 
     public void poblateMeasures(ArrayList<String> measure){
-        measure.add(0,"Selecciona una unidad de medida");
+        measure.add(0,defaultStringMeasure);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this, android.R.layout.simple_spinner_item, measure);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner sItems = findViewById(R.id.measure);
         sItems.setAdapter(adapter);
-        cargando.dismiss();
+        completed();
+    }
+
+    public static void completed(){
+        if (cargando.isShowing()) {
+            cargando.dismiss();
+        }
     }
 
     private void setAlerDialog(String layout){
@@ -145,7 +226,6 @@ public class Sale extends AppCompatActivity {
         }
         registro = instanceDialog.create();
     }
-
 
     public void addTypo(View v){
         setAlerDialog("t");
@@ -167,15 +247,9 @@ public class Sale extends AppCompatActivity {
     public void newType(View v){
         EditText value = registro.findViewById(R.id.textfield);
         String send = value.getText().toString();
-        value = registro.findViewById(R.id.textfield2);
-        String desc = value.getText().toString();
         registro.dismiss();
         cargando.show();
         PlazApp.addTypo(send);
-    }
-
-    public static void completed(){
-        cargando.dismiss();
     }
 
     public void newProduct(View v){

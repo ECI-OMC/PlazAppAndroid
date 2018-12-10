@@ -81,7 +81,7 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
     }
 
     public void navega(View v){
-        startActivity(new Intent(Index.this, Index.class));
+        startActivity(new Intent(Index.this, News.class));
     }
 
     public void info(View v){
@@ -90,7 +90,7 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
     }
 
     public void news(View v){
-        startActivity(new Intent(Index.this, Index.class));
+        startActivity(new Intent(Index.this, News.class));
     }
 
 }

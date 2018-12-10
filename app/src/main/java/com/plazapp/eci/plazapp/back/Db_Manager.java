@@ -1,5 +1,7 @@
 package com.plazapp.eci.plazapp.back;
 
+import android.support.annotation.NonNull;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,7 +20,7 @@ public class Db_Manager {
 
     private static final String routeUsers = "users";
     private static final String routeProducts = "products";
-    private static final String routeSellXproducts = "userXproduct";
+    private static final String routeSellXproducts = "sales";
     private static final String routeConsumerXproduct = "consumerXproduct";
     private static final String routeMeasure = "measure";
     private static FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -167,33 +169,88 @@ public class Db_Manager {
         return ef[0]+ef[1];
     }
 
-    public static void insertProduct(Product product, String email){
-        myRef = database.getReference(routeSellXproducts);
+    public static void insertProduct(Offert product){
+        String offerter = emailFlat(product.getOfferter());
+        myRef = database.getReference(routeSellXproducts).child(offerter);
         String id = myRef.push().getKey();
-        myRef.child(email).child(id).setValue(product);
+        myRef.child(id).setValue(product);
+        verifyRegisteredOffert(id, offerter, product);
     }
 
-    private static boolean userExist(String email){
-        return false;
+    private static void verifyRegisteredOffert(String id, String user, final Offert current) {
+        DatabaseReference offertReference = database.getReference(routeSellXproducts).child(user).child(id);
+        offertReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                boolean ans = false;
+                if (dataSnapshot.exists()){
+                    String offerter = dataSnapshot.child("offerter").getValue().toString();
+                    String product = dataSnapshot.child("product").getValue().toString();
+                    String quantity = dataSnapshot.child("quantity").getValue().toString();
+                    String type = dataSnapshot.child("type").getValue().toString();
+                    String unitMeasure = dataSnapshot.child("unitMeasure").getValue().toString();
+                    String description = dataSnapshot.child("description").getValue().toString();
+                    ans = current.isOffert(offerter,product,type,unitMeasure,quantity,description);
+                }
+                PlazApp.savedOffert(ans);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }});
     }
 
-    public static boolean isIsLogged(){
-        return isLogged;
+    private static void getOfferts(){
+        DatabaseReference offertsReference = database.getReference(routeSellXproducts);
+        ValueEventListener ev = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<Offert> offerts = new ArrayList<>();
+                if (dataSnapshot.exists()) {
+                    Iterable<DataSnapshot> dataOfferts = dataSnapshot.getChildren();
+                    for (DataSnapshot offert : dataOfferts){
+                        System.out.println("=================> "+offert.getKey());
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        };
+        offertsReference.addListenerForSingleValueEvent(ev);
     }
 
     public static User getCurrent(){
         return current;
     }
 
-    public static void addTypo(String send) {
-        myRef = database.getReference(routeProducts);
-        myRef.child(send).setValue(new TypeProduct( new ArrayList<String>(),send));
-        getTypes();
+    public static void addTypo(final String send) {
+        final DatabaseReference typeRef = database.getReference(routeProducts).child(send);
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<String> populate = new ArrayList<>();
+                if(!dataSnapshot.exists()) {
+                    typeRef.setValue(new TypeProduct( new ArrayList<String>(),send));
+                    getTypes();
+                }else{
+                    PlazApp.notifyTypeExist(send);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+
+        };
+        typeRef.addListenerForSingleValueEvent(eventListener);
     }
 
-
     public static void addProduct(final String send,  final String typo) {
-        DatabaseReference userNameRef = database.getReference(routeProducts).child(typo);
+        final DatabaseReference productRef = database.getReference(routeProducts).child(typo);
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -203,24 +260,47 @@ public class Db_Manager {
                 }else{
                     products = new ArrayList<>();
                 }
-                products.add(send);
-                myRef = database.getReference(routeProducts).child(typo).child("products");
-                myRef.setValue(products);
-                getProducts(typo);
+                if (!products.contains(send)){
+                    products.add(send);
+                    productRef.child("products").setValue(products);
+                    getProducts(typo);
+                }else{
+                    PlazApp.notifyProductExist(send,typo);
+                }
+
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
 
         };
-        userNameRef.addListenerForSingleValueEvent(eventListener);
+        productRef.addListenerForSingleValueEvent(eventListener);
 
     }
 
-    public static void addMeasure(String send, String prefix) {
-        database.getReference(routeMeasure).child(send).setValue(new Measure(send,prefix));
+    public static void addMeasure(final String send, final String prefix) {
+        final DatabaseReference measureRef = database.getReference(routeProducts).child(send);
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.exists()) {
+                    measureRef.setValue(new Measure(send,prefix));
+                    getTypes();
+                }else{
+                    PlazApp.notifyMeasureExist(send);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+
+        };
+        measureRef.addListenerForSingleValueEvent(eventListener);
+
         getMeasures();
 
     }
+
+    private static void exist(){}
 
 }
