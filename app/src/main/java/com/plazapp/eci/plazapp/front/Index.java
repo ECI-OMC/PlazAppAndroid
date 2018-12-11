@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.plazapp.eci.plazapp.R;
 
+import java.util.ArrayList;
+
 /**
  * Created by Jeffer on 4/12/2018.
  */
@@ -21,16 +23,31 @@ import com.plazapp.eci.plazapp.R;
 public class Index extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private TextView tittle;
+    private Sale sale;
+    private News news;
+    private static Index instance;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        instance = this;
+        sale = new Sale();
+        news = new News();
         setContentView(R.layout.drawer_layout);
         tittle = findViewById(R.id.tittleMenu);
         tittle.setText("Hola "+PlazApp.getNameCurrentUser().split(" ")[0]);
         setSideNavBar();
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    public static Index getInstance() {
+        return instance;
+    }
+
+    public void notifyChagedTypos(ArrayList<String> typos){
+        //sale.poblateTypos(typos);
+        //news.poblateTypos(typos);
     }
 
     private void setSideNavBar(){
@@ -77,11 +94,11 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
     }
 
     public void vender(View v){
-        startActivity(new Intent(Index.this, Sale.class));
+        startActivity(new Intent(Index.this, sale.getClass()));
     }
 
-    public void navega(View v){
-        startActivity(new Intent(Index.this, News.class));
+    public void news(View v){
+        startActivity(new Intent(Index.this, news.getClass()));
     }
 
     public void info(View v){
@@ -89,8 +106,8 @@ public class Index extends AppCompatActivity implements NavigationView.OnNavigat
 
     }
 
-    public void news(View v){
-        startActivity(new Intent(Index.this, News.class));
+    public void navega(View v){
+        startActivity(new Intent(Index.this, Index.class));
     }
 
 }

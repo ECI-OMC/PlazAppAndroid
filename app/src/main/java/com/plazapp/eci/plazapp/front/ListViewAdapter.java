@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.plazapp.eci.plazapp.R;
-import com.plazapp.eci.plazapp.back.ItemList;
+import com.plazapp.eci.plazapp.back.Offert;
 
 import java.util.ArrayList;
 
@@ -21,10 +21,13 @@ import java.util.ArrayList;
 public class ListViewAdapter extends BaseAdapter {
 
     Context context;
-    private ArrayList<ItemList> content;
+    private ArrayList<Offert> content;
 
+    public void setContent(ArrayList<Offert> newContent){
+        content = newContent;
+    }
 
-    public ListViewAdapter(Context context,ArrayList<ItemList> items){
+    public ListViewAdapter(Context context,ArrayList<Offert> items){
         this.context = context;
         this.content = items;
     }
@@ -56,15 +59,36 @@ public class ListViewAdapter extends BaseAdapter {
         TextView term = view.findViewById(R.id.term);
         ImageView icon = view.findViewById(R.id.image);
 
-        ItemList current = content.get(i);
-        tittle.setText(current.getTittle());
-        offerter.setText(current.getOfferter());
-        price.setText(current.getPrice());
-        term.setText(current.getTerm());
-        quantity.setText(current.getQuantity());
-        icon.setImageResource(current.getImage());
+        Offert current = content.get(i);
+        tittle.setText(current.getProduct());
+        offerter.setText("Por: "+current.getOfferter());
+        price.setText("Valor: "+current.getPrice()+" $ (COP)");
+        term.setText("Negociable: "+current.getTerm());
+        quantity.setText("Cantidad: "+current.getQuantity()+" "+current.getUnitMeasure());
+
+        icon.setImageResource(getImageType(current.getType()));
 
         return view;
+    }
+
+    private int getImageType(String type){
+        int ans;
+        if (type.equals("Verdura")){
+            ans = R.drawable.verdura;
+        }else if  (type.equals("Fruta")){
+            ans = R.drawable.fruta;
+        }else if (type.equals("Carne")){
+            ans=R.drawable.carne;
+        }else if (type.equals("Cereal")){
+            ans = R.drawable.cereal;
+        }else if (type.equals("Grano")){
+            ans = R.drawable.grano;
+        }else if (type.equals("Lácteo")){
+            ans = R.drawable.lacteo;
+        }else{
+            ans = R.drawable.tuberculo;
+        }
+        return ans;
     }
 
 }

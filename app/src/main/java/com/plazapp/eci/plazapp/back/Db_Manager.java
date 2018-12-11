@@ -1,5 +1,6 @@
 package com.plazapp.eci.plazapp.back;
 
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 
 import com.google.firebase.database.DataSnapshot;
@@ -28,7 +29,6 @@ public class Db_Manager {
     private static boolean isLogged = false;
     private static User current;
 
-
     public static void getTypes(){
         DatabaseReference userNameRef = database.getReference(routeProducts);
         ValueEventListener eventListener = new ValueEventListener() {
@@ -51,6 +51,27 @@ public class Db_Manager {
         userNameRef.addListenerForSingleValueEvent(eventListener);
     }
 
+    public static void getTypesNews() {
+        DatabaseReference userNameRef = database.getReference(routeProducts);
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<String> populate = new ArrayList<>();
+                if(dataSnapshot.exists()) {
+                    Iterable<DataSnapshot> typos = dataSnapshot.getChildren();
+                    for (DataSnapshot type : typos){
+                        populate.add(type.getKey().toString());
+                    }
+                }
+                PlazApp.notifyChargedTyposNews(populate);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+
+        };
+        userNameRef.addListenerForSingleValueEvent(eventListener);
+    }
     public static void getProducts(String typo){
         DatabaseReference userNameRef = database.getReference(routeProducts).child(typo);
         ValueEventListener eventListener = new ValueEventListener() {
@@ -58,6 +79,22 @@ public class Db_Manager {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ArrayList<String> products = (ArrayList<String>) dataSnapshot.child("products").getValue();
                 PlazApp.notifyChargedProducts(products);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+
+        };
+        userNameRef.addListenerForSingleValueEvent(eventListener);
+    }
+
+    public static void getProductsToNews(String type) {
+        DatabaseReference userNameRef = database.getReference(routeProducts).child(type);
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<String> products = (ArrayList<String>) dataSnapshot.child("products").getValue();
+                PlazApp.notifyChargedProductsToNews(products);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -201,7 +238,7 @@ public class Db_Manager {
             }});
     }
 
-    private static void getOfferts(){
+    public static void getOfferts(){
         DatabaseReference offertsReference = database.getReference(routeSellXproducts);
         ValueEventListener ev = new ValueEventListener() {
             @Override
@@ -210,10 +247,20 @@ public class Db_Manager {
                 if (dataSnapshot.exists()) {
                     Iterable<DataSnapshot> dataOfferts = dataSnapshot.getChildren();
                     for (DataSnapshot offert : dataOfferts){
-                        System.out.println("=================> "+offert.getKey());
+                        Iterable<DataSnapshot> offertsOf = offert.getChildren();
+                        for (DataSnapshot prod : offertsOf){
+                            String offerter = prod.child("offerter").getValue().toString();
+                            String description = prod.child("description").getValue().toString();
+                            String price = prod.child("price").getValue().toString();
+                            String product = prod.child("product").getValue().toString();
+                            String quantity = prod.child("quantity").getValue().toString();
+                            String type = prod.child("type").getValue().toString();
+                            String unitMeasure = prod.child("unitMeasure").getValue().toString();
+                            offerts.add(new Offert(offerter, product, type, unitMeasure, quantity,description, price, "No negociable", new ArrayList<String>()));
+                        }
                     }
                 }
-
+                PlazApp.notifyChargedOffertsWithoutFilter(offerts);
             }
 
             @Override

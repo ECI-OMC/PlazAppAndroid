@@ -127,4 +127,30 @@ public class PlazApp extends AppCompatActivity{
             Sale.showPersonalized("Lo lamentamos :(","tu oferta no se publico, intenta de nuevo",R.drawable.error);
         }
     }
+
+    //NEWS SECTION
+        //get offerts query
+    public static void getOfferts() {
+        Db_Manager.getOfferts();
+    }
+
+        //notify to view
+    public static void notifyChargedOffertsWithoutFilter(ArrayList<Offert> offerts) {
+        News.poblateListView(offerts);
+    }
+
+    public static void poblateTyposNews(){
+        Db_Manager.getTypesNews();
+    }
+    public static void notifyChargedTyposNews(ArrayList<String> typos){
+        //News.getInstance().poblateTypos(typos);
+    }
+
+    public static void getProductsOfTypeToNews(String type) {
+        Db_Manager.getProductsToNews(type);
+    }
+
+    public static void notifyChargedProductsToNews(ArrayList<String> products) {
+        //News.getInstance().poblateProductFilter(products);
+    }
 }
